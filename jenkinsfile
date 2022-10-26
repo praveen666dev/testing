@@ -7,7 +7,7 @@ node('new')
     
     def maven = tool name : "maven"
     
-    stage ('git clone')
+    stage ('checkout code')
     {
         git branch: 'main', url: 'https://github.com/mbkDevops/mbk-app.git'
     }
