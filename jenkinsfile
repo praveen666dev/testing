@@ -1,4 +1,4 @@
-node('new hello ')
+node('new hello world ')
 {
     properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '2')), pipelineTriggers([pollSCM('H/2 * * * *')])])
     
