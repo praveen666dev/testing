@@ -1,22 +1,30 @@
-node('new hello world ')
+node('ops')
 {
-    properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '2')), pipelineTriggers([pollSCM('H/2 * * * *')])])
-    
-    java = tool name : "jdk 9"
-    env.JAVA_HOME = "${java}"
-    
-    def maven = tool name : "maven"
-    
-    stage ('checkout code')
+     properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '3')), pipelineTriggers([pollSCM('H/02 * * * *')])])
+    def maven = tool name : "buildtool"   
+    stage ('cloneing the code')
     {
         git branch: 'main', url: 'https://github.com/mbkDevops/mbk-app.git'
     }
-    stage ('build-maven')
+    
+    stage ('clean the code')
     {
-         sh "${maven}/bin/mvn package"
+        sh "${maven}/bin/mvn clean"
     }
-    stage ('deploy in to tomcat server')
+    // stage ('code quality')
+    //{
+    //    sh "${maven}/bin/mvn sonar:sonar"
+    //}
+    stage ('build the code')
     {
-      //  deploy adapters: [tomcat9(credentialsId: '0244dac3-7130-464e-9287-991fd0bdea56', path: '', url: 'http://13.233.115.100:8080/')], contextPath: 'sample', war: '**/*.war'
+        sh "${maven}/bin/mvn package"
     }
+    stage ('store the pakages local')
+    {
+        sh "${maven}/bin/mvn install"
+    }
+   // stage ('deploy war packages to tomcat')
+    //{
+      //  deploy adapters: [tomcat9(credentialsId: 'c708a4ef-66d2-41a2-8c44-aaa3203e30d3', path: '', url: 'http://3.109.208.231:8080/')], contextPath: 'mbk', war: '**/*.war'
+    //}
 }
