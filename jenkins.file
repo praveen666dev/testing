@@ -29,8 +29,7 @@ node('ops')
     //}
     stage ('email')
     {
-         emailext body: 'it\'s good', recipientProviders: [requestor(), buildUser(kotakrishna445@gmail.com
-         ), developers()], replyTo: 'kotakrishna445@gmail.com', subject: 'sucess', to: 'kotakrishna445@gmail.com'
+         emailext body: 'it\'s good', recipientProviders: [requestor(), buildUser(), developers()], replyTo: 'kotakrishna445@gmail.com', subject: 'sucess', to: 'kotakrishna445@gmail.com'
         
      }   
 }
