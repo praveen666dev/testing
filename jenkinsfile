@@ -7,7 +7,7 @@ node('ops')
         git branch: 'main', url: 'https://github.com/mbkDevops/mbk-app.git'
     }
     
-    stage ('clean the code')
+    stage ('check out the code')
     {
         sh "${maven}/bin/mvn clean"
     }
