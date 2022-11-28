@@ -2,7 +2,7 @@ node('ops')
 {
     properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '3')), pipelineTriggers([pollSCM('H/02 * * * *')])])
     def maven = tool name : "buildtool"   
-    stage ('cloneing the code')
+    stage ('cloneing')
     {
         git branch: 'main', url: 'https://github.com/mbkDevops/mbk-app.git'
     }
